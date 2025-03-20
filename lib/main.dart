@@ -63,7 +63,7 @@ void editItem(int index){
       appBar: AppBar(title: Text('Item tracker',style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),),centerTitle: true,),
       body: Container(
         padding: EdgeInsets.all(10.0),
-        // color: Colors.grey,
+        color: Colors.white30,
         child: Column(
           children: [
             Row(
