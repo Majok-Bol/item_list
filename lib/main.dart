@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget{
 }
 class MyHomePage extends StatefulWidget{
   @override
-  HomePageInstance createState()=>HomePageInstance();
+  HomePageState createState()=>HomePageState();
 }
-class HomePageInstance extends State<MyHomePage>{
+class HomePageState extends State<MyHomePage>{
   final List<String>itemsToAdd=[];
   final TextEditingController itemController=TextEditingController();
   //track the index of the item being edited
@@ -69,15 +69,35 @@ void editItem(int index){
             Row(
               children: [
                 Expanded(child: TextField(
+                  controller: itemController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter item to add'
                   ),
-                ))
+                )),
+
               ],
             ),
+SizedBox(height: 10,),
+            Row(
+              children: [
+                Expanded(child: ElevatedButton(onPressed: addItem,style: ElevatedButton.styleFrom(backgroundColor: Colors.green), child: Text(editingIndex==null?"Add":"Update"),),),
+                SizedBox(width: 10,),
+                Expanded(child: ElevatedButton(onPressed: clearList,style: ElevatedButton.styleFrom(backgroundColor: Colors.red), child: Text('delete'),),),
+
+              ],
+            ),
+            Expanded(child: ListView.builder(
+                itemCount: itemsToAdd.length,
+                itemBuilder: (context,index){
+                  return ListTile(title: Text(itemsToAdd[index]),
+                    trailing: IconButton(onPressed:()=>editItem(index), icon:Icon(Icons.edit)),);
+
+                })),
+
           ],
+
         ),
       ),
     );
